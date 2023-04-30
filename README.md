@@ -1,1 +1,1 @@
-All work for the Launch School Ruby Track should be uploaded here
+Coursework for Launch School course RB101
