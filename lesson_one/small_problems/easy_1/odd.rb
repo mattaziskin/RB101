@@ -1,5 +1,5 @@
 def is_odd?(num)
-    num % 2 == 0 ? false : true
+  num % 2 == 0 ? false : true
 end 
 
 puts is_odd?(2)    # => false
@@ -12,7 +12,7 @@ puts is_odd?(7)    # => true
    
 def alt_is_odd? (num)
    
-   num.remainder(2) == 0 ? false:true
+  num.remainder(2) == 0 ? false:true
 end
 puts alt_is_odd?(2)    # => false
 puts alt_is_odd?(5)    # => true
