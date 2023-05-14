@@ -1,0 +1,18 @@
+en: 
+    welcome: "Welcome to Calculator! Enter your name:"
+    valid_name: "Make sure to enter a valid name."
+    number_prompt: "Please enter the first number"
+    number_prompt2: "Please enter the second number"
+    invalid_number: "Invalid number, please try again"
+    valid_operator: "Please enter a valid choice (1, 2, 3, 4)"
+    result: "The result is #{result}"
+    another: "Do you want to perform another calculation? (Y to calculate again)"
+    thanks: "Thank for using calculator"
+
+es:
+  welcome: "Bienvenido a la calculadora! Entre su nombre:"
+  valid_name: "Asegúrese de entrar un nombre válido."
+    
+
+
+# ... rest of file omitted for brevity

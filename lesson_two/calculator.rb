@@ -1,59 +1,78 @@
+require 'yaml'
+
+MESSAGES = YAML.load_file("calculator_messages.yml",{})
+def messages(message, lang='en')
+  MESSAGES[lang][message]
+end
+
 def prompt(message)
   Kernel.puts("=> #{message}")
 end 
 
-def valid_number?(num)
-  num.to_i() != 0
+def integer?(num)
+  num.to_i.to_s == num
+end 
+
+def float?(num)
+  num.to_f.to_s == num
+end 
+
+def number?(input)
+  integer?(input) || float?(input)
 end 
 
 def operation_to_message(op)
-  case op 
-  when '1'
-    "Adding"
-  when "2"
-    "Subtracting"
-  when "3"
-    "Multiplying"
-  when '4'
-    "Dividing"
-  end 
+  word = case op 
+         when '1'
+           "Adding"
+         when "2"
+           "Subtracting"
+         when "3"
+           "Multiplying"
+         when '4'
+           "Dividing"
+         end 
+  x = "Inserted code later"
+  word
 end
 
-prompt("Welcome to Calculator! Enter your name:")
+
+
+prompt(messages('welcome'))
 
 name = ''
 loop do
   name = gets.chomp
   if name.empty?()
-    prompt("Make sure to enter a valid name")
+    prompt(messages('valid_name'))
   else
     break
   end 
 end
 
-prompt "Hi #{name}"
+prompt "Hi #{name}" #Couldn't get interpolation to work with YAML
 
 loop do #main loop
   num_1 = ''
   num_2 = ''
   loop do 
-    prompt("What's the first number?")
+   prompt(messages('number_prompt'))
     num_1 = Kernel.gets().chomp
   
-    if valid_number?(num_1)
+    if number?(num_1)
       break
     else
-      prompt("Invalid number, try again")
+      prompt(messages('invalid_number'))
     end 
   end 
   loop do 
-    prompt("What is the second number?")
+    prompt(messages('number_prompt2'))
     num_2 = Kernel.gets().chomp
     
-    if valid_number?(num_2)
+    if number?(num_2)
       break
     else
-      prompt("Invalid number, try again")
+      prompt(messages('invalid_number'))
     end 
   end 
   operator_prompt = <<-MSG
@@ -63,35 +82,35 @@ loop do #main loop
     3) Multiply
     4) Divide
   MSG
-  prompt(operator_prompt)
+  prompt(operator_prompt) #The MSG formatting wasn't transferring to YAML
   choice = ''
   loop do
     choice = Kernel.gets().chomp.downcase
     if %w(1 2 3 4).include?(choice)
       break
     else
-      prompt "Please enter a valid choice (1, 2, 3, 4)"
+      prompt(messages('valid_operator'))
     end 
   end 
   
-  prompt("#{operation_to_message(choice)} the two numbers...")
+  prompt("#{operation_to_message(choice)} the two numbers...") #Couldn't get interpolation to work with YAML
   
   result = case choice
-            when '1'
-              num_1.to_i() + num_2.to_i
-            when '2'
-              num_1.to_i() - num_2.to_i
-            when '3'
-              num_1.to_i() * num_2.to_i
-            when '4'
-              num_1.to_f() / num_2.to_f
-            end
+           when '1'
+             num_1.to_i() + num_2.to_i
+           when '2'
+             num_1.to_i() - num_2.to_i
+           when '3'
+             num_1.to_i() * num_2.to_i
+           when '4'
+             num_1.to_f() / num_2.to_f
+           end
             
             
-  prompt("The result is #{result}")
-  prompt("Do you want to perform another calculation? (Y to calculate again)")
+  prompt("The result is #{result}") #Couldn't get interpolation to work with YAML
+  prompt(messages('another'))
   answer = Kernel.gets().chomp()
   break unless answer.downcase().start_with?("y")
 end 
 
-prompt("Thanks for using calculator")
+prompt(messages('thanks'))
