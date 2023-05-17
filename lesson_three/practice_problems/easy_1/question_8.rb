@@ -10,3 +10,9 @@ flintstones.each do |k,v|
 end
 
 p new_a
+
+=begin
+LS solution
+flintstones.assoc("Barney")
+#=> ["Barney", 2]
+=end
